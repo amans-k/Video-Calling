@@ -3,6 +3,9 @@ import path from "path";
 import cors from "cors";
 import { serve } from "inngest/express";
 import { clerkMiddleware } from "@clerk/express";
+import chatRoutes from "./routes/chatRouttes.js";
+
+
 
 import { ENV } from "./lib/env.js";
 import { connectDB } from "./lib/db.js";
@@ -19,6 +22,8 @@ app.use(cors({ origin: ENV.CLIENT_URL, credentials: true }));
 app.use(clerkMiddleware()); // this adds auth field to request object: req.auth()
 
 app.use("/api/inngest", serve({ client: inngest, functions }));
+app.use("/api/chat", chatRoutes);
+
 
 app.get("/health", (req, res) => {
   res.status(200).json({ msg: "api is up and running" });
