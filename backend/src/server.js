@@ -30,7 +30,20 @@ app.use(cors({
   credentials: true 
 }));
 
-// 🚨 ADD THESE DIRECT ROUTES HERE
+// 🚨 ADD ROOT ROUTE TO FIX 404 ERRORS
+app.get("/", (req, res) => {
+  res.json({ 
+    message: "Video Calling API is running",
+    frontend: "https://video-calling-2-eeu0.onrender.com",
+    endpoints: {
+      health: "/health",
+      active_sessions: "/api/sessions/active", 
+      create_session: "/api/sessions"
+    }
+  });
+});
+
+// 🚨 DIRECT ROUTES FOR FRONTEND COMPATIBILITY
 app.get('/sessions/active', async (req, res) => {
   try {
     res.status(200).json({ sessions: [] });
