@@ -21,7 +21,7 @@ app.use(express.json());
 // ✅ UPDATED CORS - Allow multiple origins
 const allowedOrigins = [
   'http://localhost:5173',
-  'https://video-calling-2-eeu0.onrender.com',
+  'https://video-callinng.onrender.com',
   ENV.CLIENT_URL
 ].filter(Boolean); // Remove empty values
 
