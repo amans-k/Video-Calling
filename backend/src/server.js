@@ -30,11 +30,44 @@ app.use(cors({
   credentials: true 
 }));
 
+// 🚨 ADD THESE DIRECT ROUTES HERE
+app.get('/sessions/active', async (req, res) => {
+  try {
+    res.status(200).json({ sessions: [] });
+  } catch (error) {
+    console.log("Error in getActiveSessions:", error.message);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+});
+
+app.post('/sessions', async (req, res) => {
+  try {
+    const { problem, difficulty } = req.body;
+    
+    if (!problem || !difficulty) {
+      return res.status(400).json({ message: "Problem and difficulty are required" });
+    }
+
+    const session = {
+      id: Date.now(),
+      problem,
+      difficulty,
+      status: "active",
+      message: "Session created - update frontend to use /api/sessions"
+    };
+
+    res.status(201).json({ session });
+  } catch (error) {
+    console.log("Error in createSession:", error.message);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+});
+
 app.use(clerkMiddleware()); // this adds auth field to request object: req.auth()
 
 app.use("/api/inngest", serve({ client: inngest, functions }));
 app.use("/api/chat", chatRoutes);
-app.use("/api/sessions", sessionRoutes); // ✅ FIXED: lowercase 's'
+app.use("/api/sessions", sessionRoutes);
 
 app.get("/health", (req, res) => {
   res.status(200).json({ msg: "api is up and running" });
