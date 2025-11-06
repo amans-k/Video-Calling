@@ -2,8 +2,8 @@ import { useUser } from "@clerk/clerk-react";
 import { Navigate, Route, Routes } from "react-router-dom"; // make sure to use react-router-dom
 import HomePage from "./pages/HomePage";
 import DashboardPage from "./pages/DashboardPage";
-import ProblemPage from "./pages/problempage";
-import ProblemsPage from "./pages/ProblemsPage";
+import ProblemPage from "./pages/ProblemPage";    // Capital P, P
+import ProblemsPage from "./pages/ProblemsPage";  // Capital P, S
 import SessionPage from "./pages/SessionPage";
 import { Toaster } from "react-hot-toast";
 
