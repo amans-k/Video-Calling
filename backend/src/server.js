@@ -29,10 +29,6 @@ app.use(cors({
   origin: allowedOrigins, 
   credentials: true 
 }));
-// 🚨 FIX undefined session ID calls
-app.get('/api/sessions/undefined', (req, res) => {
-  res.status(404).json({ message: "Session not found" });
-});
 
 // 🚨 EMERGENCY FIX - ALL DIRECT API ROUTES
 app.get('/api/sessions/active', (req, res) => {
@@ -51,7 +47,48 @@ app.post('/api/sessions', (req, res) => {
 });
 
 app.get('/api/chat/token', (req, res) => {
-  res.json({ token: "test_token_" + Date.now() });
+  res.json({ 
+    token: "dummy_token_" + Date.now(),
+    user_id: "test_user",
+    api_key: "sry7z4t68g7a"
+  });
+});
+
+app.get('/api/sessions/undefined', (req, res) => {
+  res.status(404).json({ message: "Session not found" });
+});
+
+app.get('/api/sessions/my-recent', (req, res) => {
+  res.json({ sessions: [] });
+});
+
+app.get('/api/sessions/:id', (req, res) => {
+  res.json({ 
+    session: {
+      id: req.params.id,
+      problem: "Two Sum",
+      difficulty: "easy",
+      status: "active"
+    }
+  });
+});
+
+app.post('/api/sessions/:id/join', (req, res) => {
+  res.json({ 
+    session: {
+      id: req.params.id,
+      status: "joined"
+    }
+  });
+});
+
+app.post('/api/sessions/:id/end', (req, res) => {
+  res.json({ 
+    session: {
+      id: req.params.id,
+      status: "completed"
+    }
+  });
 });
 
 // 🚨 ADD ROOT ROUTE TO FIX 404 ERRORS
