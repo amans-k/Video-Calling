@@ -30,6 +30,23 @@ app.use(cors({
   credentials: true 
 }));
 
+// 🚨 TEMPORARY EMERGENCY FIX - ADD THESE DIRECT API ROUTES
+app.get('/api/sessions/active', (req, res) => {
+  res.json({ sessions: [] });
+});
+
+app.post('/api/sessions', (req, res) => {
+  res.json({ 
+    session: {
+      id: Date.now(),
+      problem: req.body.problem || "Test Problem",
+      difficulty: req.body.difficulty || "easy", 
+      status: "active",
+      message: "Session created successfully"
+    }
+  });
+});
+
 // 🚨 ADD ROOT ROUTE TO FIX 404 ERRORS
 app.get("/", (req, res) => {
   res.json({ 
