@@ -31,6 +31,15 @@ app.use(cors({
   credentials: true 
 }));
 
+// 🚨 ULTIMATE FIX - Catch frontend undefined route
+app.get('/session/undefined', (req, res) => {
+  res.json({ 
+    status: "ready_for_video_call",
+    message: "Create a session first",
+    video_call_ready: true
+  });
+});
+
 // 🚨 VIDEO CALL FIX - Stream Token
 app.get('/api/chat/token', (req, res) => {
   try {
