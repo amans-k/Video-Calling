@@ -29,6 +29,10 @@ app.use(cors({
   origin: allowedOrigins, 
   credentials: true 
 }));
+// 🚨 FIX undefined session ID calls
+app.get('/api/sessions/undefined', (req, res) => {
+  res.status(404).json({ message: "Session not found" });
+});
 
 // 🚨 EMERGENCY FIX - ALL DIRECT API ROUTES
 app.get('/api/sessions/active', (req, res) => {
