@@ -34,7 +34,7 @@ app.use(cors({
 app.get("/", (req, res) => {
   res.json({ 
     message: "Video Calling API is running",
-    frontend: "https://video-calling-2-eeu0.onrender.com",
+    frontend: "https://video-callinng.onrender.com", // ✅ UPDATED FRONTEND URL
     endpoints: {
       health: "/health",
       active_sessions: "/api/sessions/active", 
