@@ -24,6 +24,7 @@ const userSchema = new mongoose.Schema(
   { timestamps: true } // createdAt, updatedAt
 );
 
-const User = mongoose.model("User", userSchema);
+// ⚡ Only create the model if it doesn't already exist
+const User = mongoose.models.User || mongoose.model("User", userSchema);
 
 export default User;
